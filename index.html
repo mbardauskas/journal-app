@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Journal app</title>
+	<link rel="stylesheet" href="css/normalize.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id="main">
+
+		<form id="login-form" method="post" class="login-form">
+			<div class="login-form-input">
+				<label for="LoginForm_username" class="login-form-input__label required">Username <span class="required">*</span></label>
+				<input name="LoginForm[username]" id="LoginForm_username" class="login-form-input__input" type="text">
+			</div>
+			<div class="login-form-input">
+				<label for="LoginForm_password" class="login-form-input__label required">Password <span class="required">*</span></label>
+				<input name="LoginForm[password]" id="LoginForm_password" class="login-form-input__input" type="password">
+			</div>
+			<div class="login-form--actions">
+				<input type="submit" name="submit" value="Login">
+			</div>
+		</form>
+
+		<form method="post" class="entry-form" id="entry-form">
+			<h3 class="entry-form__heading">Add journal entry</h3>
+			<div class="entry-form-input clearfix">
+				<label class="entry-form-input__label" for="entry-name">Entry name</label>
+				<input class="entry-form-input__text" name="subject" type="text" id="entry-name" />
+			</div>
+			<div class="entry-form-input clearfix">
+				<label class="entry-form-input__label" for="entry-text">Entry text</label>
+				<textarea class="entry-form-input__textarea" name="text" id="entry-text"></textarea>
+			</div>
+			<div class="entry-form-footer">
+				<button id="addEntry" class="entry-form__submit" type="submit">Add journal entry</button>
+			</div>
+		</form>
+
+		<div class="entry-list" id="entry-list"></div>
+
+	</div>
+
+	<script id="entryTemplate" type="text/template">
+		<div class="entry-item">
+			<h3 class="entry-item__name"><%= subject %></h3>
+			<div class="entry-item__date"><%= datetime %></div>
+			<div class="entry-item__teaser"><%= text %></div>
+		</div>
+	</script>
+
+	<script src="js/lib/jquery-1.11.1.min.js"></script>
+	<script src="js/lib/underscore-min.js"></script>
+	<script src="js/lib/backbone-min.js"></script>
+	<script src="js/lib/sha256.js"></script>
+
+	<script src="js/models/entry.js"></script>
+	<script src="js/models/user.js"></script>
+	<script src="js/collections/entries.js"></script>
+	<script src="js/views/entry.js"></script>
+	<script src="js/views/entries.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic);
+
+body {
+	font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.entry-form {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #eee;
+}
+.entry-form__heading {
+	margin: 10px 0 15px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.entry-form-input {
+	margin-bottom: 10px;
+}
+.entry-form-input__label {
+	display: block;
+	font-weight: bold;
+	font-size: 0.85em;
+}
+
+.entry-form-input__textarea,
+.entry-form-input__text {
+	margin: 3px 0 5px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.entry-form-input__textarea {
+	resize: vertical;
+}
+
+.entry-form-footer {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.entry-form__submit {
+	font-size: 0.8em;
+}
+
+.entry-list {
+	margin: 10px;
+}
+.entry-item {
+	margin: 10px 0 20px;
+}
+.entry-item__name {
+	margin: 0;
+	font-weight: bold;
+	font-size: 1.35em;
+}
+.entry-item__date {
+	font-size: 0.75em;
+	line-height: 1;
+	margin-bottom: 7px;
+	font-style: italic;
+}
+.entry-item__text,
+.entry-item__teaser {
+	font-size: 0.85em;
+}
