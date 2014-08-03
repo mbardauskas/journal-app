@@ -15,8 +15,7 @@ app.EntriesView = Backbone.View.extend({
 		var formData = {};
 
 		function parseID(id, removable) {
-			var parsedID = id.replace(removable, '');
-			return parsedID.charAt(0).toUpperCase() + parsedID.slice(1);
+			return id.replace(removable, '');
 		}
 
 		$('#entry-form').find(':input').each(function(i, el) {
