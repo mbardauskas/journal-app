@@ -9,5 +9,14 @@ app.EntryView = Backbone.View.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
+	},
+	events: {
+		'click #deleteEntry':'deleteEntry'
+	},
+	deleteEntry: function(e) {
+		e.preventDefault();
+
+		this.model.destroy();
+		this.remove();
 	}
 });
