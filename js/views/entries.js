@@ -1,56 +1,61 @@
-// js/views/entries.js
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'js/collections/entries',
+	'js/views/entry'
+	], function($, _, Backbone, EntriesCollection, EntryView) {
+	return Backbone.View.extend({
+		el: $('#entry-list').parent(),
 
-var app = app || {};
+		events: {
+			'click #addEntry':'addEntry'
+		},
 
-app.EntriesView = Backbone.View.extend({
-	el: $('#entry-list').parent(),
+		addEntry: function(e) {
+			e.preventDefault();
 
-	events: {
-		'click #addEntry':'addEntry'
-	},
+			var formData = {};
 
-	addEntry: function(e) {
-		e.preventDefault();
-
-		var formData = {};
-
-		function parseID(id, removable) {
-			return id.replace(removable, '');
-		}
-
-		$('#entry-form').find(':input').each(function(i, el) {
-			if( $(el).val() != '' ) {
-				var id = parseID(el.id, 'entry-');
-				formData[id] = $(el).val();
+			function parseID(id, removable) {
+				return id.replace(removable, '');
 			}
-		});
 
-		this.collection.create(formData);
-	},
+			$('#entry-form').find(':input').each(function(i, el) {
+				if( $(el).val() != '' ) {
+					var id = parseID(el.id, 'entry-');
+					formData[id] = $(el).val();
+				}
+			});
 
-	initialize: function() {
-		// @TODO: make User as a singleton
-		var user = new app.User;
-		var serialized = $.param(user.buildUserData());
+			this.collection.create(formData);
+		},
 
-		this.collection = new app.Entries();
-		this.collection.fetch({data: serialized, type: 'get', reset: true});
-		this.render();
+		initialize: function() {
+			// @TODO: make User as a singleton
+			/*var user = new app.User;
+			var serialized = $.param(user.buildUserData());*/
+			var serialized = "";
 
-		this.listenTo(this.collection, 'add', this.renderEntry);
-		this.listenTo(this.collection, 'reset', this.render);
-	},
+			this.collection = new EntriesCollection();
+			this.collection.fetch({data: serialized, type: 'get', reset: true});
+			this.render();
 
-	render: function() {
-		this.collection.each(function(item) {
-			this.renderEntry(item);
-		}, this)
-	},
+			this.listenTo(this.collection, 'add', this.renderEntry);
+			this.listenTo(this.collection, 'reset', this.render);
+		},
 
-	renderEntry: function(item) {
-		var entryView = new app.EntryView({
-			model: item
-		});
-		this.$el.append(entryView.render().el)
-	}
+		render: function() {
+			this.collection.each(function(item) {
+				this.renderEntry(item);
+			}, this)
+		},
+
+		renderEntry: function(item) {
+			var entryView = new EntryView({
+				model: item
+			});
+			this.$el.append(entryView.render().el)
+		}
+	});
 });
