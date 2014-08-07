@@ -11,12 +11,18 @@ app.EntryView = Backbone.View.extend({
 		return this;
 	},
 	events: {
-		'click .deleteEntry':'deleteEntry'
+		'click .deleteEntry':'deleteEntry',
+		'click .editEntry':'editEntry'
 	},
 	deleteEntry: function(e) {
 		e.preventDefault();
 
 		this.model.destroy();
 		this.remove();
+	},
+	editEntry: function(e) {
+		e.preventDefault();
+
+		console.log('edit');
 	}
 });
