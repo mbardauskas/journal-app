@@ -9,7 +9,36 @@
 </head>
 <body>
 	<div id="main">
+		<div class="entry-list" id="entry-list"></div>
+	</div>
 
+	<script id="entryTemplate" type="text/template">
+		<div class="entry-item">
+			<a class="entry-item__delete deleteEntry" href="#">Delete</a>
+			<h3 class="entry-item__name"><%= subject %></h3>
+			<div class="entry-item__date"><%= datetime %></div>
+			<div class="entry-item__teaser"><%= text %></div>
+		</div>
+	</script>
+
+	<script id="entryEditTemplate" type="text/template">
+		<form method="post" class="entry-form">
+			<h3 class="entry-form__heading">Edit journal entry</h3>
+			<div class="entry-form-input clearfix">
+				<label class="entry-form-input__label" for="entry-subject">Entry name</label>
+				<input class="entry-form-input__text" name="subject" type="text" id="entry-subject" value="<%= subject %>" />
+			</div>
+			<div class="entry-form-input clearfix">
+				<label class="entry-form-input__label" for="entry-text">Entry text</label>
+				<textarea class="entry-form-input__textarea" name="text" id="entry-text"><%= text %></textarea>
+			</div>
+			<div class="entry-form-footer">
+				<button id="addEntry" class="entry-form__submit" type="submit">Add journal entry</button>
+			</div>
+		</form>
+	</script>
+
+	<script id="loginFormTemplate" type="text/template">
 		<form id="login-form" method="post" class="login-form">
 			<div class="login-form-input">
 				<label for="LoginForm_username" class="login-form-input__label required">Username <span class="required">*</span></label>
@@ -23,33 +52,6 @@
 				<input type="submit" name="submit" value="Login">
 			</div>
 		</form>
-
-		<form method="post" class="entry-form" id="entry-form">
-			<h3 class="entry-form__heading">Add journal entry</h3>
-			<div class="entry-form-input clearfix">
-				<label class="entry-form-input__label" for="entry-subject">Entry name</label>
-				<input class="entry-form-input__text" name="subject" type="text" id="entry-subject" />
-			</div>
-			<div class="entry-form-input clearfix">
-				<label class="entry-form-input__label" for="entry-text">Entry text</label>
-				<textarea class="entry-form-input__textarea" name="text" id="entry-text"></textarea>
-			</div>
-			<div class="entry-form-footer">
-				<button id="addEntry" class="entry-form__submit" type="submit">Add journal entry</button>
-			</div>
-		</form>
-
-		<div class="entry-list" id="entry-list"></div>
-
-	</div>
-
-	<script id="entryTemplate" type="text/template">
-		<div class="entry-item">
-			<a class="entry-item__delete deleteEntry" href="#">Delete</a>
-			<h3 class="entry-item__name"><%= subject %></h3>
-			<div class="entry-item__date"><%= datetime %></div>
-			<div class="entry-item__teaser"><%= text %></div>
-		</div>
 	</script>
 
 	<script src="js/lib/jquery-1.11.1.min.js"></script>
