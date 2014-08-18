@@ -6,8 +6,6 @@ define([
 	'js/views/entry'
 	], function($, _, Backbone, EntriesCollection, EntryView) {
 	return Backbone.View.extend({
-		el: $('#entry-list').parent(),
-
 		events: {
 			'click #addEntry':'addEntry'
 		},
