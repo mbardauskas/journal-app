@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define(['jquery', 'underscore', 'backbone', 'js/appEvents'], function($, _, Backbone, appEvents) {
 	return Backbone.View.extend({
 		events: {
 			'submit #login-form': 'login'
@@ -16,7 +16,7 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 				method: "POST",
 				data: $form.serializeArray(),
 				success: function(data, status) {
-					Backbone.history.navigate('entries', {trigger: true});
+					appEvents.trigger('userLoggedIn', data);
 				},
 				error: function(xhr, status) {
 					console.log(xhr, status);

@@ -2,14 +2,15 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/views/menu',
-	'js/views/content'
-	], function($, _, Backbone, MenuView, ContentView) {
+	'js/views/content'], function($, _, Backbone, ContentView) {
 		return Backbone.Router.extend({
 			routes: {
 				'': 'index',
 				'entries': 'entries',
 				'entry/add': 'addEntry'
+			},
+			initialize: function() {
+				this.content = new ContentView();
 			},
 			index: function() {
 				this.changeContent('js/views/login');
@@ -19,10 +20,6 @@ define([
 			},
 			addEntry: function() {
 				this.changeContent('js/views/addentry');
-			},
-			initialize: function() {
-				this.menu = new MenuView();
-				this.content = new ContentView();
 			},
 			changeContent: function(viewPath) {
 				var changedView = function(viewModel) {

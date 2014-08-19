@@ -1,11 +1,8 @@
-
-
 define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/appRouter'
-], function($, _, Backbone, appRouter) {
+	'js/appRouter'], function($, _, Backbone, appRouter) {
 	var bootstrapper = function() {
 		this.init();
 	};
