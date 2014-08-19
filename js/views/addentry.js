@@ -24,8 +24,8 @@ define([
 				}
 			});
 
-			console.log(formData);
 			this.collection.create(formData);
+			Backbone.history.navigate('entries', {trigger: true});
 		},
 
 		parseID: function(id, removable) {
