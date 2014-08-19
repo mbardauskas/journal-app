@@ -2,13 +2,13 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/views/menu'], function($, _, Backbone, MenuView) {
+	'js/views/region-menu'], function($, _, Backbone, RegionMenuView) {
 
 	var appEvents = {};
 	_.extend(appEvents, Backbone.Events);
 
 	appEvents.on("userLoggedIn", function(data) {
-		new MenuView();
+		new RegionMenuView();
 		Backbone.history.navigate('entries', {trigger: true});
 	});
 

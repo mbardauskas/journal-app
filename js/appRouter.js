@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/views/content'], function($, _, Backbone, ContentView) {
+	'js/views/region-content'], function($, _, Backbone, RegionContentView) {
 		return Backbone.Router.extend({
 			routes: {
 				'': 'index',
@@ -10,7 +10,7 @@ define([
 				'entry/add': 'addEntry'
 			},
 			initialize: function() {
-				this.content = new ContentView();
+				this.content = new RegionContentView();
 			},
 			index: function() {
 				this.changeContent('js/views/login');
