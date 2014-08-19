@@ -4,7 +4,7 @@ require.config({
 		'underscore': 'js/lib/underscore-min',
 		'jquery': 'js/lib/jquery-1.11.1.min',
 		'backbone': 'js/lib/backbone',
-		'appRouter': 'js/appRouter'
+		'bootstrapper': 'js/bootstrapper'
 	},
 	shim: {
 		'underscore': {
@@ -23,11 +23,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'appRouter'
-	], function($, _, Backbone, appRouter) {
-
+	'bootstrapper'], function($, _, Backbone, bootstrapper) {
 	$(function() {
-		new appRouter();
-		Backbone.history.start();
+		new bootstrapper();
 	});
 });
