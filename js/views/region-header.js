@@ -1,8 +1,6 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 	return Backbone.View.extend({
-		el: $('#region-menu-view'),
-
-		template: _.template( $('#regionMenuTemplate').html() ),
+		template: _.template( $('#regionHeaderTemplate').html() ),
 
 		initialize: function() {
 			this.render();

@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/views/region-content'], function($, _, Backbone, RegionContentView) {
+	'js/views/view-controller'], function($, _, Backbone, ViewController) {
 		return Backbone.Router.extend({
 			routes: {
 				'': 'index',
@@ -10,22 +10,16 @@ define([
 				'entry/add': 'addEntry'
 			},
 			initialize: function() {
-				this.content = new RegionContentView();
+				this.viewController = new ViewController();
 			},
 			index: function() {
-				this.changeContent('js/views/login');
+				this.viewController.renderRegion('content', 'js/views/login');
 			},
 			entries: function() {
-				this.changeContent('js/views/entries');
+				this.viewController.renderRegion('content', 'js/views/entries');
 			},
 			addEntry: function() {
-				this.changeContent('js/views/addentry');
-			},
-			changeContent: function(viewPath) {
-				var changedView = function(viewModel) {
-					this.content.replaceView(new viewModel());
-				};
-				require([viewPath], changedView.bind(this));
+				this.viewController.renderRegion('content', 'js/views/addentry');
 			}
 		});
 });
