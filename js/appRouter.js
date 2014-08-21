@@ -14,6 +14,10 @@ define([
 				this.viewController = new ViewController();
 			},
 			index: function() {
+				/** @TODO: create User model; create application states model/object
+				 * to track if user is logged in; show different content depending
+				 * on application state;
+				 */
 				this.login();
 			},
 			login: function() {
