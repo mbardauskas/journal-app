@@ -6,6 +6,7 @@ define([
 		return Backbone.Router.extend({
 			routes: {
 				'': 'index',
+				'login': 'login',
 				'entries': 'entries',
 				'entry/add': 'addEntry'
 			},
@@ -13,6 +14,9 @@ define([
 				this.viewController = new ViewController();
 			},
 			index: function() {
+				this.login();
+			},
+			login: function() {
 				this.viewController.renderRegion('content', 'js/views/login');
 			},
 			entries: function() {
