@@ -1,7 +1,37 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic);
 
+html, body {
+	height: 100%;
+}
+
 body {
 	font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.login-form {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #eee;
+}
+.login-form-input {
+	margin-bottom: 10px;
+}
+.login-form-input__label {
+	display: block;
+	font-weight: bold;
+	font-size: 0.85em;
+}
+
+.login-form-input__text {
+	margin: 3px 0 5px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.login-form__submit {
+	font-size: 0.8em;
 }
 
 .entry-form {
@@ -44,11 +74,13 @@ body {
 	font-size: 0.8em;
 }
 
-.entry-list {
+.entry-items {
 	margin: 10px;
 }
 .entry-item {
 	margin: 10px 0 20px;
+	padding: 10px;
+	border: 1px solid #efefef;
 }
 .entry-item__name {
 	margin: 0;
@@ -64,4 +96,31 @@ body {
 .entry-item__text,
 .entry-item__teaser {
 	font-size: 0.85em;
+}
+
+.header-menu {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+.header-menu-list {
+	display: table-row;
+	margin: 0;
+	padding: 0;
+}
+.header-menu-list li {
+	display: table-cell;
+	margin: 0;
+	padding: 0;
+}
+.header-menu-list a {
+	color: #333;
+	background: #efefef;
+	display: block;
+	line-height: 36px;
+	text-align: center;
+	text-decoration: none;
+}
+.header-menu-list a:hover {
+	background: #dedede;
 }

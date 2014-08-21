@@ -6,6 +6,8 @@ define([
 	'js/views/entry'
 	], function($, _, Backbone, EntriesCollection, EntryView) {
 	return Backbone.View.extend({
+		tagName: 'div',
+		className: 'entry-items',
 		initialize: function() {
 			// @TODO: make User as a singleton
 			/*var user = new app.User;
