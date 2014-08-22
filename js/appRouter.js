@@ -2,26 +2,34 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/views/view-controller'], function($, _, Backbone, ViewController) {
+	'js/models/user',
+	'js/views/view-controller'], function($, _, Backbone, User, ViewController) {
 		return Backbone.Router.extend({
 			routes: {
 				'': 'index',
+				'loggedout': 'index',
 				'login': 'login',
+				'logout': 'logout',
 				'entries': 'entries',
 				'entry/add': 'addEntry'
 			},
 			initialize: function() {
 				this.viewController = new ViewController();
+				this.viewController.initPage();
 			},
 			index: function() {
-				/** @TODO: create User model; create application states model/object
-				 * to track if user is logged in; show different content depending
-				 * on application state;
-				 */
-				this.login();
+				this.viewController.initPage();
+				if(User.isLoggedIn()) {
+					this.entries();
+				} else {
+					this.login();
+				}
 			},
 			login: function() {
 				this.viewController.renderRegion('content', 'js/views/login');
+			},
+			logout: function() {
+				User.logout();
 			},
 			entries: function() {
 				this.viewController.renderRegion('content', 'js/views/entries');

@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'js/appEvents'], function($, _, Backbone, appEvents) {
+define(['jquery', 'underscore', 'backbone', 'js/models/user'], function($, _, Backbone, User) {
 	return Backbone.View.extend({
 		events: {
 			'submit #login-form': 'login'
@@ -9,19 +9,8 @@ define(['jquery', 'underscore', 'backbone', 'js/appEvents'], function($, _, Back
 		login: function(e) {
 			e.preventDefault();
 			var $form = this.$el.find('#login-form');
-			var url = '/index.php/api/login';
-
-			$.ajax({
-				url: url,
-				method: "POST",
-				data: $form.serializeArray(),
-				success: function(data, status) {
-					appEvents.trigger('userLoggedIn', data);
-				},
-				error: function(xhr, status) {
-					console.log(xhr, status);
-				}
-			});
+			var data = $form.serializeArray();
+			User.login(data);
 		},
 
 		initialize: function() {

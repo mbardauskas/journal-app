@@ -15,7 +15,15 @@ define([
 			var serialized = "";
 
 			this.collection = new EntriesCollection();
-			this.collection.fetch({data: serialized, type: 'get', reset: true});
+			/**
+			 * @TODO: Make default communications object for error,
+			 * success and other handling. Consider promises
+			 */
+			this.collection.fetch({
+				data: serialized,
+				type: 'get',
+				reset: true
+			});
 			this.render();
 
 			this.listenTo(this.collection, 'add', this.renderEntry);

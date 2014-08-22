@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'localstorage', 'js/models/entry'], function(_, Backbone, localStorage, EntryModel) {
+define(['underscore', 'backbone', 'backbone-localstorage', 'js/models/entry'], function(_, Backbone, BackoneLocalStorage, EntryModel) {
 	return Backbone.Collection.extend({
 		model: EntryModel,
 		url: '/index.php/api/entries',

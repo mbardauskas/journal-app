@@ -1,7 +1,8 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone'], function($, _, Backbone) {
+	'backbone',
+	'js/models/user'], function($, _, Backbone, User) {
 	return Backbone.View.extend({
 		el: $('#region-main'),
 		template: _.template( $('#regionMainTemplate').html() ),
@@ -15,14 +16,29 @@ define([
 			return this;
 		},
 
+		initPage: function() {
+			if(User.isLoggedIn()) {
+				this.renderRegion('header', 'js/views/region-header');
+			} else {
+				this.renderRegion('header', '');
+			}
+		},
+
 		renderRegion: function(region, viewPath) {
+			var regionSelector = '#region-' + region;
+			var $region = this.$el.find(regionSelector);
+
 			var changedView = function(viewModel) {
 				var view = new viewModel();
-				var regionSelector = '#region-' + region;
-				this.$el.find(regionSelector).html(view.el);
+				$region.html(view.el);
 				return this;
 			};
-			require([viewPath], changedView.bind(this));
+
+			if(viewPath !== "") {
+				require([viewPath], changedView.bind(this));
+			} else {
+				$region.html("");
+			}
 		}
 	});
 });
