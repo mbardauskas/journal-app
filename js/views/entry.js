@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define(['jquery', 'underscore', 'backbone', 'js/confirmation'], function($, _, Backbone, Confirmation) {
 	return Backbone.View.extend({
 		tagName: 'div',
 		className: 'entry-item',
@@ -17,8 +17,12 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 		deleteEntry: function(e) {
 			e.preventDefault();
 
-			this.model.destroy();
-			this.remove();
+			var removeModel = function() {
+				this.model.destroy();
+				this.remove();
+			};
+
+			Confirmation.confirm('Are you sure you want to remove this entry?', removeModel.bind(this));
 		}
 	});
 });
