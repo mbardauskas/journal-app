@@ -23,7 +23,7 @@
 				<div class="header-menu">
 					<ul class="header-menu-list">
 						<li><a href="#entries">List entries</a></li>
-						<li><a href="#entry/add">Add entry</a></li>
+						<li><a href="#entries/add">Add entry</a></li>
 						<li><a href="#logout">Logout</a></li>
 					</ul>
 				</div>
@@ -32,7 +32,7 @@
 	</script>
 
 	<script id="entryTemplate" type="text/template">
-		<a class="entry-item__edit editEntry" href="#">Edit</a>
+		<a class="entry-item__edit editEntry" href="#entries/<%= id %>/edit">Edit</a>
 		<a class="entry-item__delete deleteEntry" href="#">Delete</a>
 		<h3 class="entry-item__name"><%= subject %></h3>
 		<div class="entry-item__date"><%= datetime %></div>

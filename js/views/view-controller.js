@@ -24,12 +24,15 @@ define([
 			}
 		},
 
-		renderRegion: function(region, viewPath) {
+		renderRegion: function(region, viewPath, options) {
 			var regionSelector = '#region-' + region;
 			var $region = this.$el.find(regionSelector);
 
 			var changedView = function(viewModel) {
 				var view = new viewModel();
+				if(typeof options !== "undefined" && typeof options === "object") {
+					view = new viewModel(options);
+				}
 				$region.html(view.el);
 				return this;
 			};

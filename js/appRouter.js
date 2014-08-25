@@ -11,7 +11,8 @@ define([
 				'login': 'login',
 				'logout': 'logout',
 				'entries': 'entries',
-				'entry/add': 'addEntry'
+				'entries/add': 'addEntry',
+				'entries/:id/edit': 'editEntry'
 			},
 			initialize: function() {
 				this.viewController = new ViewController();
@@ -35,7 +36,10 @@ define([
 				this.viewController.renderRegion('content', 'js/views/entries');
 			},
 			addEntry: function() {
-				this.viewController.renderRegion('content', 'js/views/addentry');
+				this.viewController.renderRegion('content', 'js/views/entries-add');
+			},
+			editEntry: function(id) {
+				this.viewController.renderRegion('content', 'js/views/entries-edit', {id: id});
 			}
 		});
 });

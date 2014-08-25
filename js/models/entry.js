@@ -4,6 +4,7 @@ define(['underscore', 'backbone'], function(_, Backbone) {
 			subject: "",
 			datetime: "",
 			text: ""
-		}
+		},
+		urlRoot: "/index.php/api/entries"
 	});
 });
