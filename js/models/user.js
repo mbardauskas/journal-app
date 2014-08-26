@@ -1,5 +1,5 @@
 define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, Backbone, localStorage, appEvents) {
-	return {
+	var User = {
 		defaults: {
 			secret_key: "db57734a6a5349b3dc5df8a880f45282acf72954911b5a85de12a357c89d8e9f",
 			email: "test@mail.com",
@@ -25,8 +25,7 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 				method: "POST",
 				data: data,
 				success: function(data, status) {
-					self.setLoginStatus(1);
-					appEvents.trigger('userLoggedIn');
+					self.loggedIn();
 				},
 				error: function(xhr, status) {
 					console.log(xhr, status);
@@ -42,8 +41,7 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 				url: url,
 				method: "GET",
 				success: function(data, status) {
-					self.setLoginStatus(0);
-					appEvents.trigger('userLoggedOut', true);
+					self.loggedOut();
 				},
 				error: function(xhr, status) {
 					console.log(xhr, status);
@@ -59,6 +57,16 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 			return localStorage.getItem('authStatus') != 0;
 		},
 
+		loggedIn: function() {
+			this.setLoginStatus(1);
+			appEvents.trigger('userLoggedIn');
+		},
+
+		loggedOut: function() {
+			this.setLoginStatus(0);
+			appEvents.trigger('userLoggedOut', true);
+		},
+
 		buildUserData: function() {
 			return [
 				{name: "uid", value: this.get("uid")},
@@ -66,4 +74,10 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 			];
 		}
 	};
+
+	appEvents.on('invalidLogin', function() {
+		User.loggedOut();
+	});
+
+	return User;
 });

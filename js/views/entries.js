@@ -2,28 +2,16 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
+	'communicator',
 	'js/collections/entries',
 	'js/views/entry'
-	], function($, _, Backbone, EntriesCollection, EntryView) {
+	], function($, _, Backbone, Communicator, EntriesCollection, EntryView) {
 	return Backbone.View.extend({
 		tagName: 'div',
 		className: 'entry-items',
 		initialize: function() {
-			// @TODO: make User as a singleton
-			/*var user = new app.User;
-			var serialized = $.param(user.buildUserData());*/
-			var serialized = "";
-
 			this.collection = new EntriesCollection();
-			/**
-			 * @TODO: Make default communications object for error,
-			 * success and other handling. Consider promises
-			 */
-			this.collection.fetch({
-				data: serialized,
-				type: 'get',
-				reset: true
-			});
+			this.collection.fetch(Communicator.get);
 			this.render();
 
 			this.listenTo(this.collection, 'add', this.renderEntry);
