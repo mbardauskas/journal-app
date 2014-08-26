@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'js/confirmation'], function($, _, Backbone, Confirmation) {
+define(['jquery', 'underscore', 'backbone', 'confirmation'], function($, _, Backbone, Confirmation) {
 	return Backbone.View.extend({
 		tagName: 'div',
 		className: 'entry-item',

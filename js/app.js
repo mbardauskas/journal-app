@@ -6,7 +6,8 @@ require.config({
 		'backbone': 'js/lib/backbone',
 		'backbone-localstorage': 'js/lib/backbone.localStorage-min',
 		'bootstrapper': 'js/bootstrapper',
-		'localstorage': 'js/localstorage'
+		'confirmation': 'js/lib/local/confirmation',
+		'localstorage': 'js/lib/local/localstorage'
 	},
 	shim: {
 		'underscore': {
