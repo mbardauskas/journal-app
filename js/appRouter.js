@@ -47,7 +47,7 @@ define([
 				this.viewController.renderRegion('content', 'js/views/login');
 			},
 			logout: function() {
-				User.logout();
+				appEvents.trigger('userLogOut');
 			},
 			entries: function() {
 				this.viewController.renderRegion('content', 'js/views/entries');

@@ -25,7 +25,7 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 				method: "POST",
 				data: data,
 				success: function(data, status) {
-					self.loggedIn();
+					self.logIn();
 				},
 				error: function(xhr, status) {
 					console.log(xhr, status);
@@ -41,7 +41,7 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 				url: url,
 				method: "GET",
 				success: function(data, status) {
-					self.loggedOut();
+					self.logOut();
 				},
 				error: function(xhr, status) {
 					console.log(xhr, status);
@@ -57,12 +57,12 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 			return localStorage.getItem('authStatus') != 0;
 		},
 
-		loggedIn: function() {
+		logIn: function() {
 			this.setLoginStatus(1);
 			appEvents.trigger('userLoggedIn');
 		},
 
-		loggedOut: function() {
+		logOut: function() {
 			this.setLoginStatus(0);
 			appEvents.trigger('userLoggedOut', true);
 		},
@@ -75,8 +75,8 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 		}
 	};
 
-	appEvents.on('invalidLogin', function() {
-		User.loggedOut();
+	appEvents.on('userInvalidLogin userLogOut', function() {
+		User.logOut();
 	});
 
 	return User;
