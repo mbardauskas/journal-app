@@ -58,10 +58,11 @@
 
 	<script id="entryAddTemplate" type="text/template">
 		<form method="post" class="entry-form">
+			<input name="datetime" type="hidden" id="entry-datetime" value="<%= datetime %>" />
 			<h3 class="entry-form__heading">Add journal entry</h3>
 			<div class="entry-form-input clearfix">
 				<label class="entry-form-input__label" for="entry-subject">Entry name</label>
-				<input class="entry-form-input__text" name="subject" type="text" id="entry-subject" value="" />
+				<input class="entry-form-input__text" name="subject" type="text" id="entry-subject" value="<%= subject %>" />
 			</div>
 			<div class="entry-form-input clearfix">
 				<label class="entry-form-input__label" for="entry-text">Entry text</label>

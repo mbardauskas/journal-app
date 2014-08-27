@@ -2,8 +2,9 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
+	'date',
 	'js/collections/entries',
-	'js/models/entry'], function($, _, Backbone, EntriesCollection, EntryModel) {
+	'js/models/entry'], function($, _, Backbone, Date, EntriesCollection, EntryModel) {
 	return Backbone.View.extend({
 		template: _.template( $('#entryAddTemplate').html() ),
 
@@ -39,7 +40,9 @@ define([
 		},
 
 		render: function() {
-			this.model = new EntryModel();
+			var date = new Date();
+			var datetime = date.toString('yyyy-MM-dd HH:mm');
+			this.model = new EntryModel({subject: datetime, datetime: datetime});
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		}

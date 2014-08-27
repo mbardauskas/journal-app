@@ -8,9 +8,13 @@ require.config({
 		'bootstrapper': 'js/bootstrapper',
 		'confirmation': 'js/lib/local/confirmation',
 		'communicator': 'js/lib/local/communicator',
-		'localstorage': 'js/lib/local/localstorage'
+		'localstorage': 'js/lib/local/localstorage',
+		'date': 'js/lib/date'
 	},
 	shim: {
+		'date': {
+			exports: 'Date'
+		},
 		'underscore': {
 			exports: '_'
 		},
