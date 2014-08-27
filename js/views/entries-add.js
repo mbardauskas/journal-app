@@ -24,6 +24,8 @@ define([
 				}
 			});
 
+			this.collection = new EntriesCollection();
+
 			this.collection.create(formData);
 			Backbone.history.navigate('entries', {trigger: true});
 		},
@@ -33,7 +35,6 @@ define([
 		},
 
 		initialize: function() {
-			this.collection = new EntriesCollection();
 			this.render();
 		},
 
