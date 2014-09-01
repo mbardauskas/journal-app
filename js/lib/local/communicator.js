@@ -4,8 +4,9 @@ define(['js/appEvents'], function(appEvents) {
 			type: 'get',
 			reset: true,
 			error: function(object, jqxhr) {
-				if(jqxhr.status == 403 && jqxhr.responseText == "Login Required") {
+				if(jqxhr.status == 403 || jqxhr.status == 404) {
 					appEvents.trigger('userInvalidLogin');
+                    console.log(jqxhr.status);
 				}
 				else {
 					console.log(jqxhr.status, jqxhr.responseText);
