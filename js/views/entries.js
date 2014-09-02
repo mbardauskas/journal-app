@@ -11,7 +11,7 @@ define([
 		className: 'entry-items',
 		initialize: function() {
 			this.collection = new EntriesCollection();
-			this.collection.fetch(Communicator.get);
+			this.collection.fetch(Communicator.get());
 			this.render();
 
 			this.listenTo(this.collection, 'add', this.renderEntry);
