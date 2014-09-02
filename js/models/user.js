@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, Backbone, localStorage, appEvents) {
+define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'], function(_, Backbone, localStorage, Communicator, appEvents) {
 	var User = {
 		defaults: {
 			secret_key: "db57734a6a5349b3dc5df8a880f45282acf72954911b5a85de12a357c89d8e9f",
@@ -18,9 +18,9 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 
 		login: function(data) {
 			var self = this;
-			var url = '/index.php/api/login';
+			var url = Communicator.appApiUrl + 'login';
 
-			$.ajax({
+			Backbone.ajax({
 				url: url,
 				method: "POST",
 				data: data,
@@ -35,9 +35,9 @@ define(['underscore', 'backbone', 'localstorage', 'js/appEvents'], function(_, B
 
 		logout: function() {
 			var self = this;
-			var url = '/index.php/api/logout';
+			var url = Communicator.appApiUrl + 'logout';
 
-			$.ajax({
+			Backbone.ajax({
 				url: url,
 				method: "GET",
 				success: function(data, status) {
