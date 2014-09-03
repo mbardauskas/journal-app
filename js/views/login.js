@@ -9,8 +9,11 @@ define(['jquery', 'underscore', 'backbone', 'js/models/user'], function($, _, Ba
 		login: function(e) {
 			e.preventDefault();
 			var $form = this.$el.find('#login-form');
+			var username = this.$el.find('#LoginForm_username').val();
+			var password = this.$el.find('#LoginForm_password').val();
+
 			var data = $form.serializeArray();
-			User.login(data);
+			User.login(data, username, password);
 		},
 
 		initialize: function() {

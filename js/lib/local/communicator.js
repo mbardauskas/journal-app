@@ -1,8 +1,10 @@
-define(['js/appEvents'], function(appEvents) {
+define(['js/appEvents', 'localstorage'], function(appEvents, localStorage) {
 	return {
 		appApiUrl: document.getElementById('AppApiUrl').href,
+
 		get: function(url) {
 			var getObject = {
+				beforeSend: this.sendAuthentication,
 				type: 'get',
 				reset: true,
 				error: this.errorHandler
@@ -15,12 +17,16 @@ define(['js/appEvents'], function(appEvents) {
 			return getObject;
 		},
 
-		post: function(url) {
+		post: function(url, hasBeforeSend) {
 			var postObject = {
 				url: url,
 				method: "POST",
 				error: this.errorHandler
 			};
+
+			if(hasBeforeSend !== true)  {
+				postObject.beforeSend = this.sendAuthentication;
+			}
 
 			if(typeof url === 'string') {
 				postObject.url = url;
@@ -37,6 +43,13 @@ define(['js/appEvents'], function(appEvents) {
 			else {
 				console.log(jqxhr.status, jqxhr.responseText);
 			}
+		},
+
+		sendAuthentication: function (xhr) {
+			var user = localStorage.getItem('User.name');
+			var pass = localStorage.getItem('User.password');
+			var token = user.concat(":", pass);
+			xhr.setRequestHeader('Authorization', ("Basic ".concat(btoa(token))));
 		}
 	}
 });

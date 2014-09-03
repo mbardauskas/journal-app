@@ -16,18 +16,21 @@ define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'
 			return CryptoJS.SHA256(json);
 		},
 
-		login: function(data) {
+		login: function(formData, username, password) {
 			var self = this;
+			var url = Communicator.appApiUrl + 'login';
 
 			var login = {
-				url: Communicator.appApiUrl + 'login',
-				data: data,
-				success: function(data, status) {
+				data: formData,
+				beforeSend: function() {
+					self.beforeLogIn(username, password);
+				},
+				success: function() {
 					self.logIn();
 				}
 			};
 
-			_.extend(login, Communicator.post());
+			_.extend(login, Communicator.post(url, true));
 
 			Backbone.ajax(login);
 		},
@@ -55,12 +58,19 @@ define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'
 			return localStorage.getItem('authStatus') != 0;
 		},
 
+		beforeLogIn: function(username, password) {
+			localStorage.setItem('User.name', username);
+			localStorage.setItem('User.password', password);
+		},
+
 		logIn: function() {
 			this.setLoginStatus(1);
 			appEvents.trigger('userLoggedIn');
 		},
 
 		logOut: function() {
+			localStorage.removeItem('User.name');
+			localStorage.removeItem('User.password');
 			this.setLoginStatus(0);
 			appEvents.trigger('userLoggedOut', true);
 		},
