@@ -1,18 +1,16 @@
-define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'], function(_, Backbone, localStorage, Communicator, appEvents) {
+define([
+	'underscore',
+	'backbone',
+	'localstorage',
+	'communicator',
+	'cryptojs',
+	'js/appEvents'], function(_, Backbone, localStorage, Communicator, CryptoJS, appEvents) {
 	var User = {
-		defaults: {
-			secret_key: "db57734a6a5349b3dc5df8a880f45282acf72954911b5a85de12a357c89d8e9f",
-			email: "test@mail.com",
-			uid: "1"
-		},
-
-		getPublicKey: function() {
-			var user_data = {
-				"uid": this.get("uid"),
-				"email": this.get("email"),
-				"secret_key": this.get("secret_key")
+		generatePublicKey: function(secret_key) {
+			var data = {
+				"secret_key": secret_key
 			};
-			var json = JSON.stringify(user_data);
+			var json = JSON.stringify(data);
 			return CryptoJS.SHA256(json);
 		},
 
@@ -22,11 +20,8 @@ define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'
 
 			var login = {
 				data: formData,
-				beforeSend: function() {
-					self.beforeLogIn(username, password);
-				},
-				success: function() {
-					self.logIn();
+				success: function(response, statusText, xhr) {
+					self.loginSuccess(response);
 				}
 			};
 
@@ -58,28 +53,21 @@ define(['underscore', 'backbone', 'localstorage', 'communicator', 'js/appEvents'
 			return localStorage.getItem('authStatus') != 0;
 		},
 
-		beforeLogIn: function(username, password) {
-			localStorage.setItem('User.name', username);
-			localStorage.setItem('User.password', password);
-		},
+		loginSuccess: function(response) {
+			var responseObj = $.parseJSON(response);
 
-		logIn: function() {
+			localStorage.setItem('User.id', responseObj.uid);
+			localStorage.setItem('User.public_key', this.generatePublicKey(response.secret_key));
+
 			this.setLoginStatus(1);
 			appEvents.trigger('userLoggedIn');
 		},
 
 		logOut: function() {
-			localStorage.removeItem('User.name');
-			localStorage.removeItem('User.password');
+			localStorage.removeItem('User.id');
+			localStorage.removeItem('User.public_key');
 			this.setLoginStatus(0);
 			appEvents.trigger('userLoggedOut', true);
-		},
-
-		buildUserData: function() {
-			return [
-				{name: "uid", value: this.get("uid")},
-				{name: "public_token", value: this.getPublicKey()}
-			];
 		}
 	};
 

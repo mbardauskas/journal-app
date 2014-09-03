@@ -9,6 +9,7 @@ require.config({
 		'confirmation': 'js/lib/local/confirmation',
 		'communicator': 'js/lib/local/communicator',
 		'localstorage': 'js/lib/local/localstorage',
+		'cryptojs': 'js/lib/sha256',
 		'date': 'js/lib/date'
 	},
 	shim: {

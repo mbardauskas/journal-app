@@ -46,8 +46,8 @@ define(['js/appEvents', 'localstorage'], function(appEvents, localStorage) {
 		},
 
 		sendAuthentication: function (xhr) {
-			var user = localStorage.getItem('User.name');
-			var pass = localStorage.getItem('User.password');
+			var user = localStorage.getItem('User.id');
+			var pass = localStorage.getItem('User.public_key');
 			var token = user.concat(":", pass);
 			xhr.setRequestHeader('Authorization', ("Basic ".concat(btoa(token))));
 		}
