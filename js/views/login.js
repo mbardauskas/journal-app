@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'js/models/user'], function($, _, Backbone, User) {
+	'cryptojs',
+	'js/models/user'], function($, _, Backbone, CryptoJS, User) {
 	return Backbone.View.extend({
 		events: {
 			'submit #login-form': 'login'
@@ -13,11 +14,16 @@ define([
 		login: function(e) {
 			e.preventDefault();
 			var $form = this.$el.find('#login-form');
-			var username = this.$el.find('#LoginForm_username').val();
-			var password = this.$el.find('#LoginForm_password').val();
+
+			//encrypt password before login
+			var password = CryptoJS.SHA256(this.$el.find('#LoginForm_password').val());
+			this.$el.find('#LoginForm_password').val(password);
 
 			var data = $form.serializeArray();
-			User.login(data, username, password);
+			User.login(data);
+
+			// clearing password field since it gets encrypted
+			this.$el.find('#LoginForm_password').val('');
 		},
 
 		initialize: function() {
