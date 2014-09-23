@@ -1,11 +1,9 @@
 define([
-	'jquery',
-	'underscore',
 	'backbone',
 	'communicator',
 	'js/collections/entries',
 	'js/views/entry'
-	], function($, _, Backbone, Communicator, EntriesCollection, EntryView) {
+	], function(Backbone, Communicator, EntriesCollection, EntryView) {
 	return Backbone.View.extend({
 		tagName: 'div',
 		className: 'entry-items',

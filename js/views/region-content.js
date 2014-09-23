@@ -1,4 +1,7 @@
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define([
+	'jquery',
+	'underscore',
+	'backbone'], function($, _, Backbone) {
 	return Backbone.View.extend({
 		template: _.template( $('#regionContentTemplate').html() ),
 

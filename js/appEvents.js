@@ -1,7 +1,6 @@
 define([
-	'jquery',
 	'underscore',
-	'backbone'], function($, _, Backbone) {
+	'backbone'], function(_, Backbone) {
 
 	var appEvents = {};
 	_.extend(appEvents, Backbone.Events);

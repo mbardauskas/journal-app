@@ -1,4 +1,6 @@
-define(['underscore', 'backbone'], function(_, Backbone) {
+define([
+	'underscore',
+	'backbone'], function(_, Backbone) {
 	return Backbone.Model.extend({
 		defaults: {
 			subject: "",

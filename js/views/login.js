@@ -1,4 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'js/models/user'], function($, _, Backbone, User) {
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'js/models/user'], function($, _, Backbone, User) {
 	return Backbone.View.extend({
 		events: {
 			'submit #login-form': 'login'
