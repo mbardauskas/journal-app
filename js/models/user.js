@@ -14,7 +14,7 @@ define([
 			return CryptoJS.SHA256(json);
 		},
 
-		login: function(formData, username, password) {
+		login: function(formData) {
 			var self = this;
 			var url = Communicator.appApiUrl + 'login';
 
@@ -57,7 +57,7 @@ define([
 			var responseObj = $.parseJSON(response);
 
 			localStorage.setItem('User.id', responseObj.uid);
-			localStorage.setItem('User.public_key', this.generatePublicKey(response.secret_key));
+			localStorage.setItem('User.public_key', this.generatePublicKey(responseObj.secret_key));
 
 			this.setLoginStatus(1);
 			appEvents.trigger('userLoggedIn');
