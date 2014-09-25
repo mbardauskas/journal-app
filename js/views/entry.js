@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'confirmation'], function($, _, Backbone, Confirmation) {
+	'communicator',
+	'confirmation'], function($, _, Backbone, Communicator, Confirmation) {
 	return Backbone.View.extend({
 		tagName: 'div',
 		className: 'entry-item',
@@ -22,7 +23,7 @@ define([
 			e.preventDefault();
 
 			var removeModel = function() {
-				this.model.destroy();
+				this.model.destroy({beforeSend: Communicator.sendAuthentication});
 				this.remove();
 			};
 

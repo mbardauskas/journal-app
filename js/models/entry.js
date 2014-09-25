@@ -1,12 +1,13 @@
 define([
 	'underscore',
-	'backbone'], function(_, Backbone) {
+	'backbone',
+	'communicator'], function(_, Backbone, Communicator) {
 	return Backbone.Model.extend({
 		defaults: {
 			subject: "",
 			datetime: "",
 			text: ""
 		},
-		urlRoot: "/index.php/api/entries"
+		urlRoot: Communicator.appApiUrl + 'entries'
 	});
 });

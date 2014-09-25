@@ -3,8 +3,9 @@ define([
 	'underscore',
 	'backbone',
 	'date',
+	'communicator',
 	'js/collections/entries',
-	'js/models/entry'], function($, _, Backbone, Date, EntriesCollection, EntryModel) {
+	'js/models/entry'], function($, _, Backbone, Date, Communicator, EntriesCollection, EntryModel) {
 	return Backbone.View.extend({
 		template: _.template( $('#entryAddTemplate').html() ),
 
@@ -27,7 +28,7 @@ define([
 
 			this.collection = new EntriesCollection();
 
-			this.collection.create(formData);
+			this.collection.create(formData, {beforeSend: Communicator.sendAuthentication});
 			Backbone.history.navigate('entries', {trigger: true});
 		},
 
