@@ -2,8 +2,9 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
+	'communicator',
 	'js/collections/entries',
-	'js/models/entry'], function($, _, Backbone, EntriesCollection, EntryModel) {
+	'js/models/entry'], function($, _, Backbone, Communicator, EntriesCollection, EntryModel) {
 	return Backbone.View.extend({
 		template: _.template( $('#entryEditTemplate').html() ),
 
@@ -24,7 +25,7 @@ define([
 				}
 			});
 
-			this.model.save(formData);
+			this.model.save(formData, {beforeSend: Communicator.sendAuthentication});
 			Backbone.history.navigate('entries', {trigger: true});
 		},
 
@@ -36,7 +37,7 @@ define([
 			if(typeof options !== "undefined") {
 				this.model = new EntryModel({id: options.id});
 				this.listenTo(this.model, 'change', this.render);
-				this.model.fetch();
+				this.model.fetch({beforeSend: Communicator.sendAuthentication});
 			}
 		},
 
