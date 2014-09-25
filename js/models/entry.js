@@ -1,12 +1,14 @@
 define([
 	'underscore',
 	'backbone',
-	'communicator'], function(_, Backbone, Communicator) {
+	'localstorage',
+	'communicator'], function(_, Backbone, LocalStorage, Communicator) {
 	return Backbone.Model.extend({
 		defaults: {
 			subject: "",
 			datetime: "",
-			text: ""
+			text: "",
+			owner_id: LocalStorage.getItem('User.id')
 		},
 		urlRoot: Communicator.appApiUrl + 'entries'
 	});
